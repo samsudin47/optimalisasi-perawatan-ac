@@ -32,7 +32,6 @@ class UserController extends Controller
         ]);
 
         User::create($request->all());
-
         return redirect()->route('users');
     }
 

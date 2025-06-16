@@ -1,6 +1,5 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
-import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
 import { useState } from "react";
@@ -20,7 +19,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     current: route().current("dashboard"),
                 },
                 {
-                    name: "Data AC",
+                    name: "Data Unit AC",
                     href: route("dashboard"),
                     current: route().current("dashboard"),
                 },
@@ -40,6 +39,21 @@ export default function AuthenticatedLayout({ header, children }) {
                     current: route().current("dashboard"),
                 },
                 {
+                    name: "Master Data",
+                    children: [
+                        {
+                            name: "Master Data AC",
+                            href: route("master-ac"),
+                            current: route().current("master-ac"),
+                        },
+                        {
+                            name: "Master Clustering",
+                            href: route("dashboard"),
+                            current: route().current("dashboard"),
+                        },
+                    ],
+                },
+                {
                     name: "Data Pengguna",
                     href: route("users"),
                     current: route().current("users"),
@@ -56,6 +70,8 @@ export default function AuthenticatedLayout({ header, children }) {
         }
     };
 
+    const navigation = menu(user.role);
+
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="border-b border-gray-100 bg-blue-600 fixed top-0 left-0 w-full z-50">
@@ -68,17 +84,39 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </Link>
                             </div>
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                {menu(user.role).map((item, index) => {
-                                    return (
-                                        <NavLink
-                                            key={index}
+                                {navigation.map((item) =>
+                                    item.children ? (
+                                        <div
+                                            key={item.name}
+                                            className="relative group py-3"
+                                        >
+                                            <button className="text-white px-4 py-2 hover:text-amber-300">
+                                                {item.name}
+                                            </button>
+                                            <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-md opacity-0 group-hover:opacity-100 transition z-50">
+                                                {item.children.map((child) => (
+                                                    <Link
+                                                        key={child.name}
+                                                        href={child.href}
+                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-300 hover:text-blue-600 hover:rounded-md"
+                                                    >
+                                                        {child.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <Link
+                                            key={item.name}
                                             href={item.href}
-                                            active={item.current}
+                                            className={`text-white py-5 rounded-md text-base hover:text-amber-300 ${
+                                                item.current ? "" : ""
+                                            }`}
                                         >
                                             {item.name}
-                                        </NavLink>
-                                    );
-                                })}
+                                        </Link>
+                                    )
+                                )}
                             </div>
                         </div>
 
@@ -182,7 +220,9 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <ResponsiveNavLink
                                     key={index}
                                     href={item.href}
-                                    active={item.current}
+                                    className={`text-white py-5 rounded-md text-sm font-medium hover:text-amber-300 ${
+                                        item.current ? "bg-gray-900" : ""
+                                    }`}
                                 >
                                     {item.name}
                                 </ResponsiveNavLink>
