@@ -64,16 +64,16 @@ export default function MasterAcIndex({ master_data_ac }) {
                                 <tbody className="bg-white divide-y divide-gray-200">
                                     {master_data_ac.data.map((master) => (
                                         <tr key={master.id}>
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td className="px-6 py-4 text-sm whitespace-nowrap">
                                                 {master.code_ac}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td className="px-6 py-4 text-sm whitespace-nowrap">
                                                 {master.merk}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td className="px-6 py-4 text-sm whitespace-nowrap">
                                                 {master.type}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td className="px-6 py-4 text-sm whitespace-nowrap">
                                                 <Link
                                                     href={route(
                                                         "master-ac.edit",
