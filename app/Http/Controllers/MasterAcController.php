@@ -9,10 +9,10 @@ use Inertia\Inertia;
 class MasterAcController extends Controller
 {
     public function index(){
-        $masterAc = MasterAcModel::paginate(10);
+        $master_data_ac = MasterAcModel::paginate(10);
 
         return Inertia::render('MasterAc/Index', [
-            'masterAc' => $masterAc,
+            'master_data_ac' => $master_data_ac,
         ]);
     }
 
@@ -31,27 +31,25 @@ class MasterAcController extends Controller
         return redirect()->route('master-ac');
     }
 
-    public function edit(MasterAcModel $masterAc){
+    public function edit(MasterAcModel $master_data_ac){
         return Inertia::render('MasterAc/Edit', [
-            '$masterAc' => $masterAc,
-            dd($masterAc),
+            'master_data_ac' => $master_data_ac
         ]);
     }
 
-    public function update(Request $request, MasterAcModel $masterAc){
+    public function update(Request $request, MasterAcModel $master_data_ac){
         $request->validate([
-            'code_ac'=>'required|unique:master_data_ac,code_ac,'.$masterAc->id,
+            'code_ac'=>'required|unique:master_data_ac,code_ac,'.$master_data_ac->id,
             'merk'=>'required',
             'type'=>'required',
         ]);
 
-        $masterAc->update($request->all());
+        $master_data_ac->update($request->all());
 
         return redirect()->route('master-ac');
     }
-
-    public function destroy(MasterAcModel $masterAc){
-        $masterAc->delete();
-        return redirect()->route('masterac');
+    public function destroy(MasterAcModel $master_data_ac){
+        $master_data_ac->delete();
+        return redirect()->route('master-ac');
     }
 }
