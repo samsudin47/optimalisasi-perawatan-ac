@@ -2,32 +2,34 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import Pagination from "@/Components/Pagination";
 
-export default function MasterAcIndex({ master_data_ac }) {
+export default function MasterClusteringIndex({ master_clustering }) {
     const handleDelete = (id) => {
         if (confirm("Yakin ingin menghapus data ini?")) {
-            router.delete(route("master-ac.destroy", id));
+            router.delete(route("master-clustering.destroy", id));
         }
     };
     return (
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Master Data AC
+                    Master Data Clustering
                 </h2>
             }
         >
-            <Head title="Master Data AC" />
+            <Head title="Master Data Clustering" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center mb-4">
-                        <label>Total Data AC : {master_data_ac.total}</label>
+                        <label>
+                            Total Data Cluster : {master_clustering.total}
+                        </label>
 
                         <Link
-                            href={route("master-ac.create")}
+                            href={route("master-clustering.create")}
                             className="bg-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
                         >
-                            Create New AC
+                            Create New Cluster
                         </Link>
                     </div>
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
@@ -39,19 +41,19 @@ export default function MasterAcIndex({ master_data_ac }) {
                                             scope="col"
                                             className="px-6 py-5 text-left text-sm font-bold text-white uppercase tracking-wider"
                                         >
-                                            Kode AC
+                                            Kode Cluster
                                         </th>
                                         <th
                                             scope="col"
                                             className="px-6 py-5 text-left text-sm font-bold text-white uppercase tracking-wider"
                                         >
-                                            Merk
+                                            Keterangan
                                         </th>
                                         <th
                                             scope="col"
                                             className="px-6 py-5 text-left text-sm font-bold text-white uppercase tracking-wider"
                                         >
-                                            Type
+                                            Deskripsi
                                         </th>
                                         <th
                                             scope="col"
@@ -62,21 +64,21 @@ export default function MasterAcIndex({ master_data_ac }) {
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {master_data_ac.data.map((master) => (
+                                    {master_clustering.data.map((master) => (
                                         <tr key={master.id}>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                {master.code_ac}
+                                                {master.code_clustering}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                {master.merk}
+                                                {master.information}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                {master.type}
+                                                {master.description}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <Link
                                                     href={route(
-                                                        "master-ac.edit",
+                                                        "master-clustering.edit",
                                                         master.id
                                                     )}
                                                     className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -98,7 +100,7 @@ export default function MasterAcIndex({ master_data_ac }) {
                                     ))}
                                 </tbody>
                             </table>
-                            <Pagination links={master_data_ac.links} />
+                            <Pagination links={master_clustering.links} />
                         </div>
                     </div>
                 </div>

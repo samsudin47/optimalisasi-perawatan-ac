@@ -48,8 +48,8 @@ export default function AuthenticatedLayout({ header, children }) {
                         },
                         {
                             name: "Master Clustering",
-                            href: route("dashboard"),
-                            current: route().current("dashboard"),
+                            href: route("master-clustering"),
+                            current: route().current("master-clustering"),
                         },
                     ],
                 },

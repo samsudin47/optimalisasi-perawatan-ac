@@ -6,21 +6,21 @@ import TextInput from "@/Components/TextInput";
 import { Transition } from "@headlessui/react";
 import { Head, useForm } from "@inertiajs/react";
 
-export default function MasterAcEdit({ master_data_ac }) {
+export default function MasterClusterEdit({ master_clustering }) {
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
-            code_ac: master_data_ac.code_ac,
-            merk: master_data_ac.merk,
-            type: master_data_ac.type,
+            code_clustering: master_clustering.code_clustering,
+            information: master_clustering.information,
+            description: master_clustering.description,
         });
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route("master-ac.update", master_data_ac), {
+        patch(route("master-clustering.update", master_clustering), {
             preserveScroll: true,
             onSuccess: () => {
-                alert("AC created successfully");
+                alert("Cluster updated successfully");
             },
             onError: (errors) => {
                 console.log(errors);
@@ -31,11 +31,11 @@ export default function MasterAcEdit({ master_data_ac }) {
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Master Data Ac
+                    Master Data Clustering
                 </h2>
             }
         >
-            <Head title="Master Data AC" />
+            <Head title="Master Data Cluster" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -45,11 +45,11 @@ export default function MasterAcEdit({ master_data_ac }) {
                             <section className="max-w-xl">
                                 <header>
                                     <h2 className="text-lg font-medium text-gray-900">
-                                        Updated Data AC
+                                        Updated Data Cluster
                                     </h2>
 
                                     <p className="mt-1 text-sm text-gray-600">
-                                        Updated a new Data AC
+                                        Updated a new Data Cluster
                                     </p>
                                 </header>
 
@@ -59,76 +59,82 @@ export default function MasterAcEdit({ master_data_ac }) {
                                 >
                                     <div>
                                         <InputLabel
-                                            htmlFor="code_ac"
-                                            value="Kode AC"
+                                            htmlFor="code_clustering"
+                                            value="Kode Cluster"
                                         />
 
                                         <TextInput
-                                            id="code_ac"
+                                            id="code_clustering"
                                             className="mt-1 block w-full"
-                                            value={data.code_ac}
+                                            value={data.code_clustering}
                                             onChange={(e) =>
                                                 setData(
-                                                    "code_ac",
+                                                    "code_clustering",
                                                     e.target.value
                                                 )
                                             }
                                             required
                                             isFocused
-                                            autoComplete="code_ac"
+                                            autoComplete="code_clustering"
                                         />
 
                                         <InputError
                                             className="mt-2"
-                                            message={errors.code_ac}
+                                            message={errors.code_clustering}
                                         />
                                     </div>
 
                                     <div>
                                         <InputLabel
-                                            htmlFor="merk"
-                                            value="Merk"
+                                            htmlFor="information"
+                                            value="Keterangan"
                                         />
 
                                         <TextInput
-                                            id="merk"
+                                            id="information"
                                             className="mt-1 block w-full"
-                                            value={data.merk}
+                                            value={data.information}
                                             onChange={(e) =>
-                                                setData("merk", e.target.value)
+                                                setData(
+                                                    "information",
+                                                    e.target.value
+                                                )
                                             }
                                             required
                                             isFocused
-                                            autoComplete="merk"
+                                            autoComplete="information"
                                         />
 
                                         <InputError
                                             className="mt-2"
-                                            message={errors.merk}
+                                            message={errors.information}
                                         />
                                     </div>
 
                                     <div>
                                         <InputLabel
-                                            htmlFor="type"
-                                            value="Tipe"
+                                            htmlFor="description"
+                                            value="Deskripsi"
                                         />
 
                                         <TextInput
-                                            id="type"
+                                            id="description"
                                             className="mt-1 block w-full"
-                                            value={data.type}
+                                            value={data.description}
                                             onChange={(e) =>
-                                                setData("type", e.target.value)
+                                                setData(
+                                                    "description",
+                                                    e.target.value
+                                                )
                                             }
                                             required
                                             isFocused
-                                            autoComplete="type"
+                                            autoComplete="description"
                                         />
 
                                         <InputError
                                             className="mt-2"
-                                            message={errors.type}
+                                            message={errors.description}
                                         />
                                     </div>
 
