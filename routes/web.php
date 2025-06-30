@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MasterAcController;
 use App\Http\Controllers\MasterClusteringController;
+use App\Http\Controllers\DataUnitAcController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -39,6 +40,15 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/master-clustering/edit/{master_clustering}', [MasterClusteringController::class, 'edit'])->name('master-clustering.edit');
     Route::patch('/master-clustering/update/{master_clustering}', [MasterClusteringController::class, 'update'])->name('master-clustering.update');
     Route::delete('/master-clustering/delete/{master_clustering}', [MasterClusteringController::class, 'destroy'])->name('master-clustering.destroy');
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/data-unit-ac', [DataUnitAcController::class, 'index'])->name('data-unit-ac');
+    Route::get('/data-unit-ac/create', [DataUnitAcController::class, 'create'])->name('data-unit-ac.create');
+    Route::post('/data-unit-ac/store', [DataUnitAcController::class, 'store'])->name('data-unit-ac.store');
+    Route::get('/data-unit-ac/edit/{data_unit_ac}', [DataUnitAcController::class, 'edit'])->name('data-unit-ac.edit');
+    Route::patch('/data-unit-ac/update/{data_unit_ac}', [DataUnitAcController::class, 'update'])->name('data-unit-ac.update');
+    Route::delete('/data-unit-ac/delete/{data_unit_ac}', [DataUnitAcController::class, 'destroy'])->name('data-unit-ac.destroy');
 });
 
 Route::middleware('auth')->group(function () {

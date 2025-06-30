@@ -20,8 +20,8 @@ export default function AuthenticatedLayout({ header, children }) {
                 },
                 {
                     name: "Data Unit AC",
-                    href: route("dashboard"),
-                    current: route().current("dashboard"),
+                    href: route("data-unit-ac"),
+                    current: route().current("data-unit-ac"),
                 },
                 {
                     name: "Clustering",
