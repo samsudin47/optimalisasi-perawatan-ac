@@ -24,17 +24,12 @@ export default function AuthenticatedLayout({ header, children }) {
                     current: route().current("data-unit-ac"),
                 },
                 {
-                    name: "Clustering",
-                    href: route("dashboard"),
-                    current: route().current("dashboard"),
+                    name: "Clustering Data",
+                    href: route("clustering"),
+                    current: route().current("clustering"),
                 },
                 {
                     name: "Jadwal",
-                    href: route("dashboard"),
-                    current: route().current("dashboard"),
-                },
-                {
-                    name: "Laporan",
                     href: route("dashboard"),
                     current: route().current("dashboard"),
                 },

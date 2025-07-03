@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CentroidProsesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -50,6 +51,16 @@ Route::middleware(['auth'])->group(function(){
     Route::patch('/data-unit-ac/update/{data_unit_ac}', [DataUnitAcController::class, 'update'])->name('data-unit-ac.update');
     Route::delete('/data-unit-ac/delete/{data_unit_ac}', [DataUnitAcController::class, 'destroy'])->name('data-unit-ac.destroy');
 });
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/clustering', [CentroidProsesController::class, 'index'])->name('clustering');
+    // Route::get('/data-unit-ac/create', [DataUnitAcController::class, 'create'])->name('data-unit-ac.create');
+    // Route::post('/data-unit-ac/store', [DataUnitAcController::class, 'store'])->name('data-unit-ac.store');
+    // Route::get('/data-unit-ac/edit/{data_unit_ac}', [DataUnitAcController::class, 'edit'])->name('data-unit-ac.edit');
+    // Route::patch('/data-unit-ac/update/{data_unit_ac}', [DataUnitAcController::class, 'update'])->name('data-unit-ac.update');
+    // Route::delete('/data-unit-ac/delete/{data_unit_ac}', [DataUnitAcController::class, 'destroy'])->name('data-unit-ac.destroy');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

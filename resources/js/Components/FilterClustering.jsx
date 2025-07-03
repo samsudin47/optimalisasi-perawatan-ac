@@ -1,4 +1,4 @@
-export default function Filter({
+export default function FilterClustering({
     filter,
     setFilter,
     list_bulan = [],
@@ -7,11 +7,8 @@ export default function Filter({
 }) {
     return (
         <div className="items-center space-x-4">
-            <div className="ml-3 mb-5">
-                <h1>Filter Data Customer :</h1>
-            </div>
             <form onSubmit={onSubmit}>
-                <label className="text-md">Bulan :</label>
+                <label className="text-md">Tahun :</label>
                 <select
                     value={filter.bulan || ""}
                     onChange={(e) =>
@@ -29,7 +26,7 @@ export default function Filter({
                     ))}
                 </select>
 
-                <label className="text-md ml-10">Tahun :</label>
+                <label className="text-md ml-10">Jumlah Klaster :</label>
                 <select
                     value={filter.tahun || ""}
                     onChange={(e) =>
@@ -49,7 +46,7 @@ export default function Filter({
                     type="submit"
                     className="bg-indigo-600 ml-10 hover:bg-blue-700 text-white py-2 px-4 rounded-md"
                 >
-                    Filter Data
+                    Klusterisasi
                 </button>
             </form>
         </div>

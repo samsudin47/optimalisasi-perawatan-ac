@@ -10,11 +10,30 @@ use App\Models\MasterStatusAcModel;
 
 class DataUnitAcController extends Controller
 {
-    public function index(){
-        $data_unit_ac = DataUnitAcModel::with(['ac','status', 'clusterFirst', 'clusterSecond'])->paginate(10);
+    public function index(Request $request){
+        $query = DataUnitAcModel::with(['ac','status', 'clusterFirst', 'clusterSecond']);
+
+        if ($request->bulan) {
+            $query->whereMonth('date_service', $request->bulan);
+        }
+        if ($request->tahun) {
+            $query->whereYear('date_service', $request->tahun);
+        }
+
+        $data_unit_ac = $query->paginate(10)->appends($request->all());
+
+        // List tahun dari data
+        $list_tahun = DataUnitAcModel::selectRaw('YEAR(date_service) as tahun')->distinct()->pluck('tahun');
+        $list_bulan = collect(range(1,12))->map(function($m){ return str_pad($m,2,'0',STR_PAD_LEFT); });
 
         return Inertia::render('DataUnitAc/Index', [
-            'data_unit_ac' => $data_unit_ac
+            'data_unit_ac' => $data_unit_ac,
+            'filter' => [
+                'bulan' => $request->bulan,
+                'tahun' => $request->tahun,
+            ],
+            'list_bulan' => $list_bulan,
+            'list_tahun' => $list_tahun,
         ]);
     }
 

@@ -4,12 +4,31 @@ import Pagination from "@/Components/Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Filter from "@/Components/Filter";
+import React from "react";
 
-export default function MasterAcIndex({ data_unit_ac }) {
+export default function MasterAcIndex({
+    data_unit_ac,
+    filter = {},
+    list_bulan = [],
+    list_tahun = [],
+}) {
     const handleDelete = (id) => {
         if (confirm("Yakin ingin menghapus data ini?")) {
             router.delete(route("data-unit-ac.destroy", id));
         }
+    };
+
+    const [filterState, setFilterState] = React.useState({
+        bulan: filter.bulan || "",
+        tahun: filter.tahun || "",
+    });
+
+    const handleFilter = (e) => {
+        e.preventDefault();
+        router.get(route("data-unit-ac"), filterState, {
+            preserveState: true,
+            replace: true,
+        });
     };
     return (
         <AuthenticatedLayout
@@ -37,13 +56,11 @@ export default function MasterAcIndex({ data_unit_ac }) {
                     <div className="bg-white shadow-sm sm:rounded-lg my-10">
                         <div className="p-6 text-gray-900">
                             <Filter
-                                filter={data_unit_ac.filter}
-                                setFilter={data_unit_ac.setFilter}
-                                options={[
-                                    { value: "all", label: "Semua" },
-                                    { value: "active", label: "Aktif" },
-                                    { value: "inactive", label: "Tidak Aktif" },
-                                ]}
+                                filter={filterState}
+                                setFilter={setFilterState}
+                                list_bulan={list_bulan}
+                                list_tahun={list_tahun}
+                                onSubmit={handleFilter}
                             />
                         </div>
                     </div>
