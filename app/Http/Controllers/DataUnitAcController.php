@@ -57,8 +57,13 @@ class DataUnitAcController extends Controller
             'status_id' => 'required|exists:master_status_ac,id',
             'information' => 'nullable|string|max:255',
         ]);
+        // simpan pada tabel data unit AC
+        $data_unit_ac = DataUnitAcModel::create($request->all());
 
-        DataUnitAcModel::create($request->all());
+        //  simpan juga pada tabel clustering
+        $data_unit_ac->centroidProcess()->create([
+            'code_ac_id' => $data_unit_ac->id,
+        ]);
 
         return redirect()->route('data-unit-ac');
     }
@@ -87,10 +92,20 @@ class DataUnitAcController extends Controller
 
         $data_unit_ac->update($request->all());
 
+        if($data_unit_ac->centroidProcess){
+            $data_unit_ac->centroidProcess->update([
+                'code_ac_id' => $data_unit_ac->id,
+            ]);
+        }
+
         return redirect()->route('data-unit-ac');
     }
 
     public function destroy(DataUnitAcModel $data_unit_ac){
+        if ($data_unit_ac->centroidProcess) {
+        $data_unit_ac->centroidProcess->delete();
+        }
+
         $data_unit_ac->delete();
         return redirect()->route('data-unit-ac');
     }

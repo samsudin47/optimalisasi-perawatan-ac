@@ -12,7 +12,11 @@ class DataUnitAcModel extends Model
     protected $table = 'data_unit_ac';
     protected $primaryKey = 'id';
 
-        public function ac()
+    public function centroidProcess()
+    {
+    return $this->hasOne(CentroidProsesModel::class, 'code_ac_id');
+    }
+    public function ac()
     {
         return $this->belongsTo(MasterAcModel::class, 'id_ac');
     }
