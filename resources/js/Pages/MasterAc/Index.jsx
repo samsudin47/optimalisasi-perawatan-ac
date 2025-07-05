@@ -1,6 +1,8 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import Pagination from "@/Components/Pagination";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function MasterAcIndex({ master_data_ac }) {
     const handleDelete = (id) => {
@@ -79,20 +81,24 @@ export default function MasterAcIndex({ master_data_ac }) {
                                                         "master-ac.edit",
                                                         master.id
                                                     )}
-                                                    className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                                    className="inline-flex items-center mx-2 rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                                     type="button"
                                                 >
-                                                    Edit
+                                                    <FontAwesomeIcon
+                                                        icon={faPenToSquare}
+                                                    />
                                                 </Link>
-                                                <button
+                                                <Link
                                                     onClick={() =>
                                                         handleDelete(master.id)
                                                     }
-                                                    className="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ml-2"
+                                                    className="inline-flex items-center rounded-md border border-transparent bg-red-700 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                                     type="button"
                                                 >
-                                                    Delete
-                                                </button>
+                                                    <FontAwesomeIcon
+                                                        icon={faTrash}
+                                                    />
+                                                </Link>
                                             </td>
                                         </tr>
                                     ))}

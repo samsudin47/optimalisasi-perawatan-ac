@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/master-ac/store', [MasterAcController::class, 'store'])->name('master-ac.store');
     Route::get('/master-ac/edit/{master_data_ac}', [MasterAcController::class, 'edit'])->name('master-ac.edit');
     Route::patch('/master-ac/update/{master_data_ac}', [MasterAcController::class, 'update'])->name('master-ac.update');
-    Route::delete('/master-ac/delete/{masterAc}', [MasterAcController::class, 'destroy'])->name('master-ac.destroy');
+    Route::delete('/master-ac/delete/{master_data_ac}', [MasterAcController::class, 'destroy'])->name('master-ac.destroy');
 });
 
 Route::middleware(['auth'])->group(function(){
@@ -52,13 +52,11 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/data-unit-ac/delete/{data_unit_ac}', [DataUnitAcController::class, 'destroy'])->name('data-unit-ac.destroy');
 });
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('/clustering', [CentroidProsesController::class, 'index'])->name('clustering');
-    // Route::get('/data-unit-ac/create', [DataUnitAcController::class, 'create'])->name('data-unit-ac.create');
-    // Route::post('/data-unit-ac/store', [DataUnitAcController::class, 'store'])->name('data-unit-ac.store');
-    // Route::get('/data-unit-ac/edit/{data_unit_ac}', [DataUnitAcController::class, 'edit'])->name('data-unit-ac.edit');
-    // Route::patch('/data-unit-ac/update/{data_unit_ac}', [DataUnitAcController::class, 'update'])->name('data-unit-ac.update');
-    // Route::delete('/data-unit-ac/delete/{data_unit_ac}', [DataUnitAcController::class, 'destroy'])->name('data-unit-ac.destroy');
+Route::middleware('auth')->group(function () {
+    // Route untuk clustering data
+    Route::get('/clustering-data', [CentroidProsesController::class, 'index'])->name('clustering-data.index');
+    Route::post('/clustering-data/uji', [CentroidProsesController::class, 'ujiKlaster'])->name('clustering-data.uji');
+    Route::post('/clustering-data/uji-semua', [CentroidProsesController::class, 'ujiSemua'])->name('clustering-data.uji-semua');
 });
 
 
