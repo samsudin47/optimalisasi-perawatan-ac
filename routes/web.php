@@ -52,13 +52,15 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/data-unit-ac/delete/{data_unit_ac}', [DataUnitAcController::class, 'destroy'])->name('data-unit-ac.destroy');
 });
 
-Route::middleware('auth')->group(function () {
-    // Route untuk clustering data
-    Route::get('/clustering-data', [CentroidProsesController::class, 'index'])->name('clustering-data.index');
-    Route::post('/clustering-data/uji', [CentroidProsesController::class, 'ujiKlaster'])->name('clustering-data.uji');
-    Route::post('/clustering-data/uji-semua', [CentroidProsesController::class, 'ujiSemua'])->name('clustering-data.uji-semua');
-});
+// Route::middleware('auth')->group(function () {
+//     // Route untuk clustering data
+//     Route::post('/clustering-data/uji', [CentroidProsesController::class, 'ujiKlaster'])->name('clustering-data.uji');
+//     Route::post('/clustering-data/uji-semua', [CentroidProsesController::class, 'ujiSemua'])->name('clustering-data.uji-semua');
+// });
 
+Route::middleware('auth')->group((function(){
+    Route::get('/clustering-data', [CentroidProsesController::class, 'index'])->name('clustering-data');
+}));
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

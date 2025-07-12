@@ -25,8 +25,8 @@ export default function AuthenticatedLayout({ header, children }) {
                 },
                 {
                     name: "Clustering Data",
-                    href: route("clustering-data.index"),
-                    current: route().current("clustering-data.index"),
+                    href: route("clustering-data"),
+                    current: route().current("clustering-data"),
                 },
                 {
                     name: "Jadwal",
