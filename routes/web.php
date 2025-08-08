@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CentroidProsesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UserController;
@@ -13,9 +15,9 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/users', [UserController::class, 'index'])->name('users');
@@ -52,15 +54,19 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/data-unit-ac/delete/{data_unit_ac}', [DataUnitAcController::class, 'destroy'])->name('data-unit-ac.destroy');
 });
 
-// Route::middleware('auth')->group(function () {
-//     // Route untuk clustering data
-//     Route::post('/clustering-data/uji', [CentroidProsesController::class, 'ujiKlaster'])->name('clustering-data.uji');
-//     Route::post('/clustering-data/uji-semua', [CentroidProsesController::class, 'ujiSemua'])->name('clustering-data.uji-semua');
-// });
-
-Route::middleware('auth')->group((function(){
+Route::middleware('auth')->group(function () {
     Route::get('/clustering-data', [CentroidProsesController::class, 'index'])->name('clustering-data');
-}));
+    Route::post('/clustering-data/uji', [CentroidProsesController::class, 'ujiKlaster'])->name('clustering-data.uji');
+    Route::post('/clustering-data/uji-semua', [CentroidProsesController::class, 'ujiSemua'])->name('clustering-data.uji-semua');
+    Route::post('/clustering-data/uji-iterasi-1', [CentroidProsesController::class, 'ujiIterasi1'])->name('clustering-data.uji-iterasi-1');
+    Route::post('/clustering-data/uji-iterasi-2', [CentroidProsesController::class, 'ujiIterasi2'])->name('clustering-data.uji-iterasi-2');
+    Route::post('/clustering-data/uji-iterasi-3', [CentroidProsesController::class, 'ujiIterasi3'])->name('clustering-data.uji-iterasi-3');
+    Route::delete('/clustering-data/reset', [CentroidProsesController::class, 'resetIterasi'])->name('clustering-data.reset');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

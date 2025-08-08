@@ -30,8 +30,8 @@ export default function AuthenticatedLayout({ header, children }) {
                 },
                 {
                     name: "Jadwal",
-                    href: route("dashboard"),
-                    current: route().current("dashboard"),
+                    href: route("jadwal"),
+                    current: route().current("jadwal"),
                 },
                 {
                     name: "Master Data",

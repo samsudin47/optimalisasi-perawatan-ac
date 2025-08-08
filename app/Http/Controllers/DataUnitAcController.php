@@ -63,6 +63,12 @@ class DataUnitAcController extends Controller
         //  simpan juga pada tabel clustering
         $data_unit_ac->centroidProcess()->create([
             'code_ac_id' => $data_unit_ac->id,
+            'cluster_first_id' => $data_unit_ac->cluster_first_id,
+            'cluster_second_id' => $data_unit_ac->cluster_second_id,
+            'result_first_cluster' => null,
+            'result_second_cluster' => null,
+            'closest_distance' => null,
+            'summary_cluster' => null,
         ]);
 
         return redirect()->route('data-unit-ac');
@@ -95,6 +101,12 @@ class DataUnitAcController extends Controller
         if($data_unit_ac->centroidProcess){
             $data_unit_ac->centroidProcess->update([
                 'code_ac_id' => $data_unit_ac->id,
+                'cluster_first_id' => $data_unit_ac->cluster_first_id,
+                'cluster_second_id' => $data_unit_ac->cluster_second_id,
+                'result_first_cluster' => null,
+                'result_second_cluster' => null,
+                'closest_distance' => null,
+                'summary_cluster' => null,
             ]);
         }
 

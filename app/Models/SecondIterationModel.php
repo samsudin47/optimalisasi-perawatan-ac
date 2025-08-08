@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\DataUnitAcModel;
 
-class CentroidProsesModel extends Model
+class SecondIterationModel extends Model
 {
-    protected $table = 'first_centroid_process';
+    protected $table = 'second_centroid_process';
     protected $primaryKey = 'id';
+
     public function data_unit_ac()
     {
         return $this->belongsTo(DataUnitAcModel::class, 'code_ac_id');
     }
-
     public function cluster_first()
     {
         return $this->belongsTo(DataUnitAcModel::class, 'cluster_first_id');
@@ -22,7 +21,7 @@ class CentroidProsesModel extends Model
     {
         return $this->belongsTo(DataUnitAcModel::class, 'cluster_second_id');
     }
-    protected $fillable = [
+     protected $fillable = [
         'code_ac_id',
         'cluster_first_id',
         'cluster_second_id',
@@ -32,3 +31,5 @@ class CentroidProsesModel extends Model
         'summary_cluster',
     ];
 }
+
+
