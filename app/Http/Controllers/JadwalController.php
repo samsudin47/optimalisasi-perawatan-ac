@@ -77,7 +77,7 @@ class JadwalController extends Controller
             $thirdIteration = ThirdIterationModel::all();
             if ($thirdIteration->isNotEmpty()) {
                 $finalIteration = $thirdIteration->map(function($item) {
-                    $dataUnit = DataUnitAcModel::with('ac')->find($item->code_ac_id);
+                    $dataUnit = DataUnitAcModel::with('ac')->where('id', $item->code_ac_id)->first();
                     if ($dataUnit) {
                         $item->data_unit_ac = $dataUnit;
                     }

@@ -41,11 +41,11 @@ export default function AuthenticatedLayout({ header, children }) {
                             href: route("master-ac"),
                             current: route().current("master-ac"),
                         },
-                        {
-                            name: "Master Clustering",
-                            href: route("master-clustering"),
-                            current: route().current("master-clustering"),
-                        },
+                        // {
+                        //     name: "Master Clustering",
+                        //     href: route("master-clustering"),
+                        //     current: route().current("master-clustering"),
+                        // },
                     ],
                 },
                 {
