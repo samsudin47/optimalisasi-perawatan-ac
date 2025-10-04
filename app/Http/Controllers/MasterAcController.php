@@ -43,11 +43,10 @@ class MasterAcController extends Controller
             'merk'=>'required',
             'type'=>'required',
         ]);
-
         $master_data_ac->update($request->all());
-
         return redirect()->route('master-ac');
     }
+
     public function destroy(MasterAcModel $master_data_ac){
         $master_data_ac->delete();
         return redirect()->route('master-ac');

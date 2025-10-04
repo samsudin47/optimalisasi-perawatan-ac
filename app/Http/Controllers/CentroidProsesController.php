@@ -293,44 +293,36 @@ class CentroidProsesController extends Controller
             // Centroid awal tetap (sesuai Excel)
             $centroid1 = [3, 2]; // C1: Lama Pemakaian = 3, Frekuensi = 2
             $centroid2 = [14, 2];  // C2: Lama Pemakaian = 14, Frekuensi = 2
-
             // Simpan centroid ke session untuk iterasi selanjutnya
             session([
                 'current_iteration' => 1,
                 'centroids' => [$centroid1, $centroid2],
                 'iteration_status' => 'completed'
-            ]);
-
-            // Update semua data centroid process dengan perhitungan iterasi 1
+            ]);// Update semua data centroid process dengan perhitungan iterasi 1
             $centroidProcesses = CentroidProsesModel::with('data_unit_ac')->get();
             foreach ($centroidProcesses as $process) {
                 if ($process->data_unit_ac) {
                     $D = $process->data_unit_ac->cluster_first_id;  // Lama Pemakaian
                     $E = $process->data_unit_ac->cluster_second_id; // Frekuensi Kerusakan
-
                     // result_first_cluster = SQRT((D-J6)^2+(E-K6)^2) dimana J6=14, K6=2
                     $process->result_first_cluster = sqrt(
                         pow($D - $centroid1[0], 2) + pow($E - $centroid1[1], 2)
                     );
-
                     // result_second_cluster = SQRT((D-J8)^2+(E-K8)^2) dimana J8=3, K8=2
                     $process->result_second_cluster = sqrt(
                         pow($D - $centroid2[0], 2) + pow($E - $centroid2[1], 2)
                     );
-
                     // closest_distance = MIN(F6:G6)
                     $process->closest_distance = min(
                         $process->result_first_cluster,
                         $process->result_second_cluster
                     );
-
                     // summary_cluster = IF(F6<G6,"klaster 1","klaster 2")
                     if ($process->result_first_cluster < $process->result_second_cluster) {
                         $process->summary_cluster = 1; // klaster 1
                     } else {
                         $process->summary_cluster = 2; // klaster 2
                     }
-
                     $process->save();
                 }
             }
